@@ -11,8 +11,15 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <limits>
+#include <string>
+#include <algorithm>
 
-int main()
+int main(int argc, char **argv)
 {
-	std::cout << "Hello World" << std::endl;
+	(void)argc;
+
+	std::string str(argv[1]);
+	std::transform(str.begin(), str.end(), str.begin(), [] (unsigned char c) { return std::toupper(c); });
+	std::cout << str << std::endl;
 }

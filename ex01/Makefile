@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2022/09/06 01:41:33 by fnichola         ###   ########.fr        #
+#    Updated: 2022/09/07 05:56:03 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp \
 	Contact.cpp \
-	Phonebook.cpp
+	Phonebook.cpp \
+	sample_data.cpp
 
 ifdef WITH_BONUS
 endif

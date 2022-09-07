@@ -2,6 +2,8 @@
 # define PHONEBOOK_HPP
 
 # include <iostream>
+# include <sstream>
+# include <iomanip>
 # include "Contact.hpp"
 
 class Phonebook
@@ -12,17 +14,22 @@ public:
 	~Phonebook();
 
 	void loadSampleData();
-	void printContact(const int index);
-	void printIndex();
-	void addContact();
-	void exitPhonebook();
+	void add();
+	void search();
 
 private:
 
-	void inputContact(const int index);
-	std::string promptUser(const std::string prompt);
-	Contact m_contactDB[8];
 	int m_index;
+	int m_size;
+	Contact m_contactDB[8];
+
+	std::string promptContactInfo(const std::string prompt);
+	std::string truncate(const std::string& str, const size_t width);
+	void inputContact(const int index);
+	void printIndex();
+	void printContact(const int index);
+	int promptIndex();
+	int stoi(const std::string str);
 };
 
 #endif

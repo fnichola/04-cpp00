@@ -10,10 +10,9 @@ class Phonebook
 {
 public:
 
-	Phonebook();
+	Phonebook(const bool shouldLoadSampleData = false);
 	~Phonebook();
 
-	void loadSampleData();
 	void add();
 	void search();
 

@@ -6,36 +6,35 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2022/09/14 06:07:20 by fnichola         ###   ########.fr        #
+#    Updated: 2022/11/25 02:55:05 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = phonebook
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp \
 	Contact.cpp \
 	Phonebook.cpp \
-	sample_data.cpp
 
 OBJS = $(SRCS:.cpp=.o)
-DEPS = $(SRCS:.c=.d)
+DEPS = $(SRCS:.cpp=.d)
 
 all: $(NAME)
 
-%.o: %.c
-	$(CXX) $(CXXFLAGS) -MMD -MP -I includes -o $@ -c $<
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -MMD -MP -o $@ -c $<
 	
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -I includes -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
-	$(RM) $(NAME) $(DEPS)
+	$(RM) $(NAME)
 
 re: fclean all
 

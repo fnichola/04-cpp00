@@ -1,9 +1,77 @@
 #include "Phonebook.hpp"
 
-Phonebook::Phonebook()
+Phonebook::Phonebook(const bool shouldLoadSampleData)
 {
 	m_index = 0;
 	m_size = 0;
+
+	if (!shouldLoadSampleData)
+		return ;
+
+	m_contactDB[0].SetFirstName("JohnathanTheGreat");
+	m_contactDB[0].SetLastName("Smith");
+	m_contactDB[0].SetNickname("Johnny");
+	m_contactDB[0].SetPhoneNumber("1234567890");
+	m_contactDB[0].SetSecret("Loves cat cafes.");
+	++m_index;
+	++m_size;
+	
+	m_contactDB[1].SetFirstName("Bob");
+	m_contactDB[1].SetLastName("Brown");
+	m_contactDB[1].SetNickname("Bobby");
+	m_contactDB[1].SetPhoneNumber("098765431");
+	m_contactDB[1].SetSecret("Doesn't brush his teeth.");
+	++m_index;
+	++m_size;
+
+	m_contactDB[2].SetFirstName("Jane");
+	m_contactDB[2].SetLastName("Doe");
+	m_contactDB[2].SetNickname("Jiji");
+	m_contactDB[2].SetPhoneNumber("23450987123");
+	m_contactDB[2].SetSecret("Killed 12 people.");
+	++m_index;
+	++m_size;
+
+	m_contactDB[3].SetFirstName("JohnathanTheGreat");
+	m_contactDB[3].SetLastName("Smith");
+	m_contactDB[3].SetNickname("Johnny");
+	m_contactDB[3].SetPhoneNumber("1234567890");
+	m_contactDB[3].SetSecret("Loves cat cafes.");
+	++m_index;
+	++m_size;
+	
+	m_contactDB[4].SetFirstName("Bob2");
+	m_contactDB[4].SetLastName("Brown");
+	m_contactDB[4].SetNickname("Bobby");
+	m_contactDB[4].SetPhoneNumber("098765431");
+	m_contactDB[4].SetSecret("Doesn't brush his teeth.");
+	++m_index;
+	++m_size;
+
+	m_contactDB[5].SetFirstName("Jane2");
+	m_contactDB[5].SetLastName("Doe");
+	m_contactDB[5].SetNickname("Jiji");
+	m_contactDB[5].SetPhoneNumber("23450987123");
+	m_contactDB[5].SetSecret("Killed 12 people.");
+	++m_index;
+	++m_size;
+
+	m_contactDB[6].SetFirstName("Bob3");
+	m_contactDB[6].SetLastName("Brown");
+	m_contactDB[6].SetNickname("Bobby");
+	m_contactDB[6].SetPhoneNumber("098765431");
+	m_contactDB[6].SetSecret("Doesn't brush his teeth.");
+	++m_index;
+	++m_size;
+
+	m_contactDB[7].SetFirstName("Jane3");
+	m_contactDB[7].SetLastName("Doe");
+	m_contactDB[7].SetNickname("Jiji");
+	m_contactDB[7].SetPhoneNumber("23450987123");
+	m_contactDB[7].SetSecret("Killed 12 people.");
+	++m_index;
+	++m_size;
+
 }
 
 Phonebook::~Phonebook(){}
@@ -26,7 +94,10 @@ void Phonebook::add()
 void Phonebook::search()
 {
 	printIndex();
-	promptIndex();
+	if (m_size > 0)
+		promptIndex();
+	else
+		std::cout << "There are no entries to diplay.\n" << std::endl;
 }
 
 
@@ -41,7 +112,8 @@ std::string Phonebook::promptContactInfo(const std::string prompt)
 	while (value.length() == 0)
 	{
 		std::cout << prompt;
-		std::getline(std::cin, value);
+		if (!std::getline(std::cin, value))
+			break ;
 		if (value.length() == 0)
 			std::cout << "Cannot be blank!" << std::endl;
 	}
@@ -51,11 +123,11 @@ std::string Phonebook::promptContactInfo(const std::string prompt)
 void Phonebook::inputContact(const int index)
 {
 	std::cout << std::endl;
-	m_contactDB[index].set_firstName(promptContactInfo("First Name: "));
-	m_contactDB[index].set_lastName(promptContactInfo("Last Name: "));
-	m_contactDB[index].set_nickname(promptContactInfo("Nickname: "));
-	m_contactDB[index].set_phoneNumber(promptContactInfo("Phone Number: "));
-	m_contactDB[index].set_secret(promptContactInfo("Darkest Secret: "));
+	m_contactDB[index].SetFirstName(promptContactInfo("First Name: "));
+	m_contactDB[index].SetLastName(promptContactInfo("Last Name: "));
+	m_contactDB[index].SetNickname(promptContactInfo("Nickname: "));
+	m_contactDB[index].SetPhoneNumber(promptContactInfo("Phone Number: "));
+	m_contactDB[index].SetSecret(promptContactInfo("Darkest Secret: "));
 	std::cout << std::endl;
 }
 
@@ -72,7 +144,8 @@ int Phonebook::promptIndex()
 	std::cout << "Enter an index number to view details: ";
 	while (index < 0 || index >= m_size)
 	{
-		std::getline(std::cin, value);
+		if (!std::getline(std::cin, value))
+			break ;
 		index = stoi(value);
 		if (index >=0 && index < m_size)
 		{
@@ -98,9 +171,9 @@ void Phonebook::printIndex()
 	for (int i=0; i < m_size; ++i)
 	{
 		std::cout << "|" << std::setw(10) << std::right << i;
-		std::cout << "|" << std::setw(10) << std::right << truncate(m_contactDB[i].get_firstName(), 10);
-		std::cout << "|" << std::setw(10) << std::right << truncate(m_contactDB[i].get_lastName(), 10);
-		std::cout << "|" << std::setw(10) << std::right << truncate(m_contactDB[i].get_nickname(), 10);
+		std::cout << "|" << std::setw(10) << std::right << truncate(m_contactDB[i].GetFirstName(), 10);
+		std::cout << "|" << std::setw(10) << std::right << truncate(m_contactDB[i].GetLastName(), 10);
+		std::cout << "|" << std::setw(10) << std::right << truncate(m_contactDB[i].GetNickname(), 10);
 		std::cout << "|" << std::endl;
 	}
 	std::cout << std::endl;
@@ -109,11 +182,11 @@ void Phonebook::printIndex()
 void Phonebook::printContact(const int index)
 {
 	std::cout << std::endl;
-	std::cout << "First Name = " << m_contactDB[index].get_firstName() << std::endl;
-	std::cout << "Last Name = " << m_contactDB[index].get_lastName() << std::endl;
-	std::cout << "Nickname = " << m_contactDB[index].get_nickname() << std::endl;
-	std::cout << "Phone Number = " << m_contactDB[index].get_phoneNumber() << std::endl;
-	std::cout << "Darkest Secret = " << m_contactDB[index].get_secret() << std::endl;
+	std::cout << "First Name = " << m_contactDB[index].GetFirstName() << std::endl;
+	std::cout << "Last Name = " << m_contactDB[index].GetLastName() << std::endl;
+	std::cout << "Nickname = " << m_contactDB[index].GetNickname() << std::endl;
+	std::cout << "Phone Number = " << m_contactDB[index].GetPhoneNumber() << std::endl;
+	std::cout << "Darkest Secret = " << m_contactDB[index].GetSecret() << std::endl;
 	std::cout << std::endl;
 }
 

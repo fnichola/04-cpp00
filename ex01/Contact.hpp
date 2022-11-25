@@ -10,18 +10,18 @@ public:
 	~Contact();
 
 	// getters
-	std::string get_firstName() const;
-	std::string get_lastName() const;
-	std::string get_nickname() const;
-	std::string get_phoneNumber() const;
-	std::string get_secret() const;
+	std::string GetFirstName() const;
+	std::string GetLastName() const;
+	std::string GetNickname() const;
+	std::string GetPhoneNumber() const;
+	std::string GetSecret() const;
 
 	// setters
-	int set_firstName(const std::string);
-	int set_lastName(const std::string);
-	int set_nickname(const std::string);
-	int set_phoneNumber(const std::string);
-	int set_secret(const std::string);
+	void SetFirstName(const std::string);
+	void SetLastName(const std::string);
+	void SetNickname(const std::string);
+	void SetPhoneNumber(const std::string);
+	void SetSecret(const std::string);
 
 private:
 	std::string m_firstName;
@@ -29,7 +29,7 @@ private:
 	std::string m_nickname;
 	std::string m_phoneNumber;
 	std::string m_secret;
-	std::string truncate(const std::string& str, size_t width);
+	std::string Truncate(const std::string& str, size_t width);
 };
 
 #endif

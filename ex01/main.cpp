@@ -6,20 +6,19 @@
 
 int	main()
 {
-	Phonebook book;
-
+	Phonebook book(false);
 	std::string cmd;
 
-	book.loadSampleData();
 	while (true)
 	{
 		std::cout << "Please enter a command (ADD, SEARCH, or EXIT): ";
-		std::getline(std::cin, cmd);
-		if (!cmd.compare("ADD"))
+		if (!std::getline(std::cin, cmd))
+			break ;
+		if (cmd == "ADD")
 			book.add();
-		else if (!cmd.compare("SEARCH"))
+		else if (cmd == "SEARCH")
 			book.search();
-		else if (!cmd.compare("EXIT"))
+		else if (cmd == "EXIT")
 			return (0);
 	}
 }
